@@ -60,6 +60,7 @@ int main(int argc, char* argv[])
     else if(sort_name == "MergeSort") MergeSort(items);
     else if(sort_name == "IterativeMergeSort") IterativeMergeSort(items);
     else if(sort_name == "ShellSort") ShellSort(items);
+    else if(sort_name == "RadixSort") RadixSort(items);
 
 
     gettimeofday(&end_time, 0);
