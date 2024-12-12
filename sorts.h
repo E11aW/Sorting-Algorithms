@@ -8,6 +8,7 @@ void MergeSort(vector<int>& vec, int first, int last);
 void merge(vector<int>& vec, int first, int mid, int last);
 void IterativeMerge(vector<int>& vec, vector<int>& tmp, int left, int mid, int right);
 void QuickSort(vector<int>& vec, int first, int last);
+void CountingSort(vector<int>& vec, int digit);
 
 void BubbleSort(vector<int>& vec)
 {
@@ -105,7 +106,7 @@ void merge(vector<int>& vec, int first, int mid, int last)
     }
 }
 
-void IterativeMergeSort(vector<int>& vec) // figure out where 42 went
+void IterativeMergeSort(vector<int>& vec)
 {
     int size = vec.size();
     vector<int> tmp(size);
@@ -220,4 +221,38 @@ void ShellSort(vector<int>& vec)
             vec[j] = tmp;
         }
     }
+}
+
+void RadixSort(vector<int>& vec)
+{
+    int size = vec.size();
+    // Get max digits
+    int max = vec[0];
+    for(int i = 1; i < size; i++)
+    {
+        if(vec[i] > max) max = vec[i];
+    }
+    for(int digit = 1; max / digit > 0; digit *= 10)
+    {
+        CountingSort(vec, digit);
+    }
+}
+void CountingSort(vector<int>& vec, int digit)
+{
+    int size = vec.size();
+    vector<int> output(size);
+    vector<int> count(10, 0);
+    for(int i = 0; i < size; i++)
+    {
+        count[(vec[i] / digit) % 10]++; 
+    }
+    for(int i = 1; i < 10; i++) count[i] = count[i - 1];
+    // Add counted values to output vector
+    for(int i = size - 1; i >= 0; i--)
+    {
+        output[count[(vec[i] / digit) % 10] - 1] = vec[i];
+        count[(vec[i] / digit) % 10]--;
+    }
+    // Copy new list over
+    for(int i = 0; i < size; i++) vec[i] = output[i];
 }

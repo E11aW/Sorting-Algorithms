@@ -15,6 +15,9 @@ int main(int argc, char* argv[])
     string sort_name = "";
     bool print_out = false;
 
+    vector<int> vec = {1, 4, 3, 6, 5, 7};
+    RadixSort(vec);
+    for(int i = 0; i < vec.size(); i++) cout << vec[i] << " ";
     if ((argc != 3) && (argc != 4))
     {
         cerr << "Usage: Sorter algorithm size [Print]" << endl;
