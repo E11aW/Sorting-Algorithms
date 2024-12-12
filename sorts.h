@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
@@ -8,7 +9,7 @@ void MergeSort(vector<int>& vec, int first, int last);
 void merge(vector<int>& vec, int first, int mid, int last);
 void IterativeMerge(vector<int>& vec, vector<int>& tmp, int left, int mid, int right);
 void QuickSort(vector<int>& vec, int first, int last);
-void CountingSort(vector<int>& vec, int digit);
+void CountSort(vector<int>& vec, int exponent);
 
 void BubbleSort(vector<int>& vec)
 {
@@ -225,33 +226,33 @@ void ShellSort(vector<int>& vec)
 
 void RadixSort(vector<int>& vec)
 {
-    int size = vec.size();
-    // Get max digits
-    int max = vec[0];
-    for(int i = 1; i < size; i++)
+    int max = *max_element(vec.begin(), vec.end());
+    for(int exponent = 1; max / exponent > 0; exponent *= 10)
     {
-        if(vec[i] > max) max = vec[i];
-    }
-    for(int digit = 1; max / digit > 0; digit *= 10)
-    {
-        CountingSort(vec, digit);
+        CountSort(vec, exponent);
     }
 }
-void CountingSort(vector<int>& vec, int digit)
+void CountSort(vector<int>& vec, int exponent)
 {
     int size = vec.size();
     vector<int> output(size);
-    vector<int> count(10, 0);
+    int count[10] = {0};
     for(int i = 0; i < size; i++)
     {
-        count[(vec[i] / digit) % 10]++; 
+        int digit = (vec[i] / exponent) % 10;
+        count[digit]++;
     }
-    for(int i = 1; i < 10; i++) count[i] = count[i - 1];
-    // Add counted values to output vector
+    // Transforming count array to store cumulative counts
+    for(int i = 1; i < 10; i++) 
+    {
+        count[i] += count[i - 1];
+    }
+    // Convert cumulative count frequencies into positions
     for(int i = size - 1; i >= 0; i--)
     {
-        output[count[(vec[i] / digit) % 10] - 1] = vec[i];
-        count[(vec[i] / digit) % 10]--;
+       int digit = (vec[i] / exponent) % 10;
+       output[count[digit] - 1] = vec[i];
+       count[digit]--;
     }
     // Copy new list over
     for(int i = 0; i < size; i++) vec[i] = output[i];
