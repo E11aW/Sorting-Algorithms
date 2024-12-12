@@ -176,7 +176,7 @@ void QuickSort(vector<int>& vec, int first, int last)
     else
     {
         int mid = (first + last) / 2;
-        // Find ideal pivot of first, mid, and last
+        // Find ideal pivot between first, mid, and last
         if(vec[first] > vec[last]) swap(vec[first], vec[last]);
         if(vec[first] > vec[mid]) swap(vec[first], vec[mid]);
         else if(vec[mid] > vec[last]) swap(vec[mid], vec[last]);
