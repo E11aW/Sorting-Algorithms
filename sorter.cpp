@@ -54,11 +54,11 @@ int main(int argc, char* argv[])
     gettimeofday(&start_time, 0);
 
     // Selecting sort method
-    if (sort_name == "QuickSort") QuickSort(items);
-    else if(sort_name == "BubbleSort") BubbleSort(items);
+    if (sort_name == "BubbleSort") BubbleSort(items);
     else if(sort_name == "InsertionSort") InsertionSort(items);
     else if(sort_name == "MergeSort") MergeSort(items);
     else if(sort_name == "IterativeMergeSort") IterativeMergeSort(items);
+    else if(sort_name == "QuickSort") QuickSort(items);
     else if(sort_name == "ShellSort") ShellSort(items);
     else if(sort_name == "RadixSort") RadixSort(items);
 
