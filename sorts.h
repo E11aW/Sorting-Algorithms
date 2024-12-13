@@ -57,7 +57,6 @@ void MergeSort(vector<int>& vec, int first, int last)
         // Sorts each half of vector
         MergeSort(vec, first, mid);
         MergeSort(vec, mid + 1, last);
-        // Merges vecotr back together again
         merge(vec, first, mid, last);
     }
 }
@@ -136,7 +135,7 @@ void IterativeMerge(vector<int>& vec, vector<int>& tmp, int left, int mid, int r
     int index = first1;
     while(first1 <= last1 && first2 <= last2)
     {
-        // Compare fronts of both lists
+        // Compares front of both lists
         if(vec[first1] <= vec[first2])
         {
             tmp[index] = vec[first1];

@@ -4,7 +4,7 @@
 #include <iostream>
 #include "sorts.h"
 using namespace std;
-//Global functions
+// Global functions
 void InitVector(vector<int>& item_vetor, int size);
 void PrintVector(const vector<int>& item_vector, string name);
 int Elapsed(const timeval &start, const timeval &end);
@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
         PrintVector(items, string("items"));
         cout << endl;
     }
-    //get time to measure the time it takes to sort
+    // Gets time to measure the time it takes to sort
     struct timeval start_time, end_time;
     gettimeofday(&start_time, 0);
 
@@ -100,8 +100,7 @@ void PrintVector(const vector<int>& item_vector, string name)
     }
     cout << endl;
 }
-// Function to calculate elapsed time
-// Microseconds
+// Function to calculate elapsed time in microseconds
 int Elapsed(const timeval &start, const timeval &end)
 {
     return (end.tv_sec - start.tv_sec) * 1000000
